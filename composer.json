@@ -3,7 +3,7 @@
     "description": "A fullstack Todo application",
     "autoload": {
         "psr-4": {
-            "Dell\\TodoPhpApp\\": "src/"
+            "Dell\\TodoPhpApp\\": "src/App"
         }
     },
     "authors": [

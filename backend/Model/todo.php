@@ -1,49 +1,34 @@
 <?php
 
-declare(strict_types=1);
-
-namespace App\Model;
-
 class Todo {
-    private $conn;
-    private $table_name = "task";
-    
-    public $id;
-    public $title;
+
+    public $text;
     public $completed;
+
+    private $conn;
+    private $table_name;
 
     public function __construct($db)
     {
         $this->conn = $db;
+        $this->table_name = "task";
     }
 
-    public function create()
+    public function create_todo()
     {
-        $query = "INSERT INTO".$this->table_name."SET title=:title, completed=:title";
-       $statement = $this->conn->prepare($query);
+        $query = "INSERT INTO".$this->table_name."SET text=?, completed=?";
+        $obj = $this->conn->prepare($query);
 
-       $this->title = htmlspecialchars(strip_tags($this->title));
-       $this->completed = htmlspecialchars(strip_tags($this->completed));
+        $this->text = htmlspecialchars(strip_tags($this->text));
+        $this->completed = htmlspecialchars(strip_tags($this->completed));
 
-       $statement->bindParam(":title", $this->title);
-       $statement->bindParam(":completed", $this->completed);
+        $obj->bind_param('ss', $this->text, $this->completed);
 
-       if ($statement->execute()) {
+        if($obj->execute()) {
             return true;
-       }
-       else {
-            return false;
-       }
-        
+        }
+        return false;
     }
 
-    public function read()
-    {
-        $query = "SELECT * FROM ".$this->table_name;
-        $statement = $this->conn->prepare($query);
-        $statement->execute();
-        return $statement;
-    }
+    
 }
-
-

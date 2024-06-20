@@ -2,33 +2,38 @@
 
 class Todo {
 
-    public $text;
+    public $id;
+    public $title;
     public $completed;
+    public $created_at;
+    public $description;
 
     private $conn;
-    private $table_name;
+    private $table_name = "task";
 
-    public function __construct($db)
-    {
+    public function __construct($db) {
         $this->conn = $db;
-        $this->table_name = "task";
     }
 
-    public function create_todo()
-    {
-        $query = "INSERT INTO".$this->table_name."SET text=?, completed=?";
-        $obj = $this->conn->prepare($query);
+    public function create_todo() {
+        $query = "INSERT INTO " . $this->table_name . " (title, completed, description) VALUES (:title, :completed, :description)";
+        
+        $stmt = $this->conn->prepare($query);
 
-        $this->text = htmlspecialchars(strip_tags($this->text));
+        // Sanitize inputs
+        $this->title = htmlspecialchars(strip_tags($this->title));
         $this->completed = htmlspecialchars(strip_tags($this->completed));
+        $this->description = htmlspecialchars(strip_tags($this->description));
 
-        $obj->bind_param('ss', $this->text, $this->completed);
-
-        if($obj->execute()) {
+        // Bind values
+        $stmt->bindParam(':title', $this->title);
+        $stmt->bindParam(':completed', $this->completed);
+        $stmt->bindParam(':description', $this->description);
+        
+        if ($stmt->execute()) {
             return true;
         }
         return false;
     }
-
-    
 }
+?>

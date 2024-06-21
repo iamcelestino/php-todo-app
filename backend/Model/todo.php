@@ -75,4 +75,21 @@ class Todo
         }
         return false;
     }
+
+    public function markCompleted()
+    {
+        $sql_query = "UPDATE".$this->table_name ."SET completed  = :completed WHERE id = :id";
+        $stmt = $this->conn->prepare($sql_query);
+
+        $this->title = htmlspecialchars(strip_tags($this->id));
+        $this->completed = htmlspecialchars(strip_tags($this->completed));
+
+        $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+        $stmt->bindParam('completed', $this->completed, PDO::PARAM_BOOL);
+
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
 }

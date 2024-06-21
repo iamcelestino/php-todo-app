@@ -37,18 +37,11 @@ class Todo {
     }
 
     public function getAllTodo() {
+
        $query = "SELECT * FROM " . $this->table_name;
 
-       $stmt = $this->conn->prepare($query);
-       
-       $stmt->bindParam(':id', $this->id);
-       $stmt->bindParam(':title', $this->title);
-       $stmt->bindParam(':completed', $this->completed);
-       $stmt->bindParam(':created_at', $this->created_at);
-       $stmt->bindParam(':description', $this->description);
-       $stmt->execute();
+       $result = $this->conn->query($query);
 
-       $result = $stmt->fetch(PDO::FETCH_ASSOC);
        return $result;
     }
 }

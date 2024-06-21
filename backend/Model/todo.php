@@ -16,9 +16,9 @@ class Todo {
     }
 
     public function create_todo() {
-        $query = "INSERT INTO " . $this->table_name . " (title, completed, description) VALUES (:title, :completed, :description)";
+        $sql_query = "INSERT INTO " . $this->table_name . " (title, completed, description) VALUES (:title, :completed, :description)";
         
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->prepare($sql_query);
 
         // Sanitize inputs
         $this->title = htmlspecialchars(strip_tags($this->title));
@@ -38,11 +38,25 @@ class Todo {
 
     public function getAllTodo() {
 
-       $query = "SELECT * FROM " . $this->table_name;
+       $sql_query = "SELECT * FROM " . $this->table_name;
 
-       $result = $this->conn->query($query);
+       $result = $this->conn->query($sql_query);
 
        return $result;
+    }
+
+    public function getSingleTodo()
+    {
+        $sql_query = "SELECT * FROM " . $this->table_name . " WHERE id = :id";
+
+        $stmt = $this->conn->prepare($sql_query);
+        $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $todo = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $todo;
+
     }
 }
 ?>

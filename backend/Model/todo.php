@@ -1,6 +1,7 @@
 <?php
 
-class Todo {
+class Todo
+{
 
     public $id;
     public $title;
@@ -11,13 +12,15 @@ class Todo {
     private $conn;
     private $table_name = "task";
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->conn = $db;
     }
 
-    public function create_todo() {
+    public function create_todo()
+    {
         $sql_query = "INSERT INTO " . $this->table_name . " (title, completed, description) VALUES (:title, :completed, :description)";
-        
+
         $stmt = $this->conn->prepare($sql_query);
 
         // Sanitize inputs
@@ -26,23 +29,24 @@ class Todo {
         $this->description = htmlspecialchars(strip_tags($this->description));
 
         // Bind values
-        $stmt->bindParam(':title', $this->title);
-        $stmt->bindParam(':completed', $this->completed);
-        $stmt->bindParam(':description', $this->description);
-        
+        $stmt->bindParam(':title', $this->title, PDO::PARAM_STR);
+        $stmt->bindParam(':completed', $this->completed, PDO::PARAM_BOOL);
+        $stmt->bindParam(':description', $this->description, PDO::PARAM_STR);
+
         if ($stmt->execute()) {
             return true;
         }
         return false;
     }
 
-    public function getAllTodo() {
+    public function getAllTodo()
+    {
 
-       $sql_query = "SELECT * FROM " . $this->table_name;
+        $sql_query = "SELECT * FROM " . $this->table_name;
 
-       $result = $this->conn->query($sql_query);
+        $result = $this->conn->query($sql_query);
 
-       return $result;
+        return $result;
     }
 
     public function getSingleTodo()
@@ -56,7 +60,19 @@ class Todo {
 
         $todo = $stmt->fetch(PDO::FETCH_ASSOC);
         return $todo;
+    }
 
+    public function deleteTodo()
+    {
+        $sql_query = "DELETE FROM " . $this->table_name . " WHERE id = :id";
+
+        $stmt = $this->conn->prepare($sql_query);
+
+        $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
 }
-?>

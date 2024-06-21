@@ -10,15 +10,15 @@ $connection = $db->connect();
 
 $todo = new Todo($connection);
 
-if($_SERVER['REQUEST_METHOD'] ===  'GET') {
-    
+if ($_SERVER['REQUEST_METHOD'] ===  'GET') {
+
     $data = $todo->getAllTodo();
 
-    if($data) {
-        
+    if ($data) {
+
         $ass['record'] = array();
 
-        while(($row = $data->fetch(PDO::FETCH_ASSOC)) != false) {
+        while (($row = $data->fetch(PDO::FETCH_ASSOC)) != false) {
             array_push($ass['record'], array(
                 "id" => $row['id'],
                 "title" => $row['title'],
@@ -33,14 +33,10 @@ if($_SERVER['REQUEST_METHOD'] ===  'GET') {
             "data" => $ass['record']
         ));
     }
-
-}
-else {
+} else {
     htmlspecialchars(503);
     echo json_encode(array(
         "status" => 0,
         "message" => "Access Denied"
     ));
 }
-
-?>

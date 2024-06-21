@@ -1,7 +1,6 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Contet-Type: application/json; charset=utf-8");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-origin: *");
+header("Access-Control-Allow-Methods: DELETE");
 
 include_once "../config/database.php";
 include_once "../Model/todo.php";
@@ -11,23 +10,23 @@ $connection = $db->connect();
 
 $todo = new Todo($connection);
 
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
+if ($_SERVER['REQUEST_METHOD'] === "DELETE") {
     $param = json_decode(file_get_contents("php://input"));
 
     if (isset($param->id)) {
         $todo->id = $param->id;
-        $todoData = $todo->getSingleTodo();
+        $todoData = $todo->deleteTodo();
     }
     http_response_code(200);
     echo json_encode(array(
         "status" => 1,
-        "data" => $todoData
+        "message" => $todoData . "Deleted successfull"
     ));
 } else {
     http_response_code(503);
     echo json_encode(array(
         "status" => 1,
-        "message" => "ACCESS DENIED"
+        "message" => "Access Denied"
     ));
 }

@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === "DELETE") {
 } else {
     http_response_code(503);
     echo json_encode(array(
-        "status" => 1,
+        "status" => 0,
         "message" => "Access Denied"
     ));
 }

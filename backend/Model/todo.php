@@ -78,7 +78,7 @@ class Todo
 
     public function markCompleted()
     {
-        $sql_query = "UPDATE".$this->table_name ."SET completed  = :completed WHERE id = :id";
+        $sql_query = "UPDATE ".$this->table_name . " SET completed  = :completed  WHERE id = :id";
         $stmt = $this->conn->prepare($sql_query);
 
         $this->title = htmlspecialchars(strip_tags($this->id));

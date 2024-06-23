@@ -1,5 +1,6 @@
 <?php
 header('Access-Control-Allow-origin: *');
+header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: GET');
 
 include_once "../config/database.php";
@@ -40,3 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] ===  'GET') {
         "message" => "Access Denied"
     ));
 }
+
+
+?>

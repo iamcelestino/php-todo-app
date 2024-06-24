@@ -7,28 +7,65 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <h1>TODO</h1>
-        <img src="./images/icon-moon.svg" alt="">
+    <div class="">
+        <div class="container">
+            <div class="header">
+                <h1>TODO</h1>
+                <img src="./images/icon-moon.svg" alt="">
+            </div>
+            <form class="search__form" action="">
+                <input type="search" name="searchTodo" id="searchTodo" class="search__todo">
+            </form>
+        </div>
     </div>
 
-    <div class="todo">
-        <p class="todo">
-            
-        </p>
-    </div>
+    <section class="todo_section">
+            <div class="container">
+                <div  class="todo">
+                    <div class="todo__title">
+                        <div class="todo__title__item">
+                            <input value="true" type="radio" name="completed" id="completed">
+                            <p class="title">TAKE MEDICINE</p>
+                        </div>
+                        <ion-icon name="close-circle"></ion-icon>
+                    </div>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam temporibus soluta nesciunt pariatur unde fugit, nam eos dolore ullam quas alias veniam minima quae, obcaecati reiciendis ducimus ipsa quia repellat.</p>
+                </div>
+                
+                
+                <div class="">
+                    <div class="">
+                        <a href="">
+                            <span>8</span>
+                            items left
+                        </a>
+                    </div>
+                    <div class="">
+                        <a href="">All</a>
+                        <a href="">Active</a>
+                        <a href="">completed</a>
+                    </div>
+                    <div class="">
+                        <a href="">Clear completed</a>
+                    </div>
+                </div>
+            </div>
+    </section>
 
-    <form action="" id="task-form">
-        <label for=""></label>
-        <input type="text" id="title" name="title">
-
-        <textarea name="description" id="description"></textarea>
-        <select name="completed" id="completed">
-            <option value="YES">YES</option>
-            <option value="NO">NO</option>
-        </select>
+    <form action="" id="task__form">
+        <div class="container">
+            <label for=""></label>
+            <input type="text" id="title" name="title">
+            <textarea name="description" id="description"></textarea>
+            <select name="completed" id="completed">
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </div>
     </form>
-    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="./app.js"></script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 <?php
 header('Access-Control-Allow-origin: *');
-header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: GET');
 
 include_once "../config/database.php";

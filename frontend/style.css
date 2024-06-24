@@ -1,0 +1,86 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #181824;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 0.8rem 1rem;
+
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+h1, p {
+    color: rgb(201, 201, 201);
+}
+
+a {
+    text-decoration: none;
+    color: rgb(159, 159, 159);
+}
+
+a:hover {
+    color: rgb(0, 110, 255);
+}
+
+.search__form{
+    background-color: #24273D;
+    padding: 0.5rem;
+}
+
+.search__todo {
+    width: 100%;
+    padding: 0.4rem 0;
+    background-color: #24273D;
+    border: none;
+}
+
+.description {
+    display: none;
+    padding: 0.4rem 0.2rem;
+}
+
+.search__form, .todo {
+    border-radius: 5px;
+}
+
+.todo {
+    background-color: #24273D;
+    padding: 1rem;
+
+}
+
+.todo__title, .todo__title__item {
+    display: flex;
+    align-items: center;
+}
+
+.todo__title__item  {
+    gap: 10px;
+}
+
+.todo__title {
+    justify-content: space-between;
+}
+
+ion-icon {
+    color: gray;
+    font-size: 2rem;
+}
+
+#task__form {
+    display: none;
+}
+

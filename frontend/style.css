@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -6,6 +7,7 @@
 
 body {
     background-color: #181824;
+    font-family: "Jost", sans-serif;
 }
 
 .container {
@@ -14,7 +16,6 @@ body {
     padding: 0.8rem 1rem;
 
 }
-
 .header {
     display: flex;
     align-items: center;
@@ -31,9 +32,15 @@ a {
     color: rgb(159, 159, 159);
 }
 
+a + a {
+    margin-left: 0.3rem;
+}
+
 a:hover {
     color: rgb(0, 110, 255);
 }
+
+
 
 .search__form{
     background-color: #24273D;
@@ -42,9 +49,16 @@ a:hover {
 
 .search__todo {
     width: 100%;
-    padding: 0.4rem 0;
-    background-color: #24273D;
+    padding: 0.6rem 1rem;
     border: none;
+    background-color: #24273D;
+    /* background: url(./images/search\(1\).svg) no-repeat;
+    background-position: right center;
+    background-size: 25px; */
+}
+
+.todo_section > container {
+    background-color: #24273D;
 }
 
 .description {
@@ -52,11 +66,11 @@ a:hover {
     padding: 0.4rem 0.2rem;
 }
 
-.search__form, .todo {
-    border-radius: 5px;
+.todo {
+    border-bottom: 1px solid gray;
 }
 
-.todo {
+.todo, .footer {
     background-color: #24273D;
     padding: 1rem;
 
@@ -84,3 +98,8 @@ ion-icon {
     display: none;
 }
 
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+}

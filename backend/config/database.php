@@ -2,7 +2,7 @@
 
 class Database
 {
-
+    
     private $user;
     private $hostname;
     private $dbname;

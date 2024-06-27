@@ -76,6 +76,18 @@ class Todo
         return false;
     }
 
+    public function deleteCompletedTodo()
+    {
+        $sql_query = "DELETE FROM " . $this->table_name . "WHERE completed = 1";
+
+        $stmt = $this->conn->prepare($sql_query);
+
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
     public function markCompleted()
     {
         $sql_query = "UPDATE ".$this->table_name . " SET completed  = :completed  WHERE id = :id";
@@ -91,5 +103,23 @@ class Todo
             return true;
         }
         return false;
+    }
+
+    public function getAllcompleted() 
+    {
+        $sql_query = "SELECT * FROM " .$this->table_name . " WHERE completed = 1";
+
+        $result = $this->conn->query($sql_query);
+
+        return $result;
+    }
+
+    public function getAtive()
+    {
+        $sql_query = "SELECT * FROM " .$this->table_name . " WHERE completed = 0";
+
+        $result = $this->conn->query($sql_query);
+
+        return $result;
     }
 }

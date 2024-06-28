@@ -16,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] ===  'GET') {
 
     if ($data) {
 
-        $ass['record'] = array();
+        $assoc['record'] = array();
 
         while (($row = $data->fetch(PDO::FETCH_ASSOC)) != false) {
-            array_push($ass['record'], array(
+            array_push($assoc['record'], array(
                 "id" => $row['id'],
                 "title" => $row['title'],
                 "completed" => $row['completed'],
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] ===  'GET') {
         http_response_code(200);
         echo json_encode(array(
             "status" => 1,
-            "data" => $ass['record']
+            "data" => $assoc['record']
         ));
     }
 } else {

@@ -82,7 +82,7 @@ class Todo
 
         $stmt = $this->conn->prepare($sql_query);
 
-        if($stmt->execute()) {
+        if ($stmt->execute()) {
             return true;
         }
         return false;
@@ -90,7 +90,7 @@ class Todo
 
     public function markCompleted()
     {
-        $sql_query = "UPDATE ".$this->table_name . " SET completed  = :completed  WHERE id = :id";
+        $sql_query = "UPDATE " . $this->table_name . " SET completed  = :completed  WHERE id = :id";
         $stmt = $this->conn->prepare($sql_query);
 
         $this->title = htmlspecialchars(strip_tags($this->id));
@@ -99,15 +99,15 @@ class Todo
         $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
         $stmt->bindParam('completed', $this->completed, PDO::PARAM_BOOL);
 
-        if($stmt->execute()) {
+        if ($stmt->execute()) {
             return true;
         }
         return false;
     }
 
-    public function getAllcompleted() 
+    public function getAllcompleted()
     {
-        $sql_query = "SELECT * FROM " .$this->table_name . " WHERE completed = 1";
+        $sql_query = "SELECT * FROM " . $this->table_name . " WHERE completed = 1";
 
         $result = $this->conn->query($sql_query);
 
@@ -116,7 +116,16 @@ class Todo
 
     public function getAtive()
     {
-        $sql_query = "SELECT * FROM " .$this->table_name . " WHERE completed = 0";
+        $sql_query = "SELECT * FROM " . $this->table_name . " WHERE completed = 0";
+
+        $result = $this->conn->query($sql_query);
+
+        return $result;
+    }
+
+    public function countAllActive()
+    {
+        $sql_query = "SELECT COUNT(id) as Active  FROM " . $this->table_name . " WHERE completed = 0";
 
         $result = $this->conn->query($sql_query);
 

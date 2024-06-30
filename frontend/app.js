@@ -1,61 +1,42 @@
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // const createTodoForm = document.getElementById('task__form');
+    const createTodoForm = document.getElementById('task__form');
 
-    //  createTodoForm.addEventListener('submit', async function(event) {
-    //     event.preventDefault();
+     createTodoForm.addEventListener('submit', async function(event) {
 
-    //     const title = document.querySelector('#title').value;
-    //     const description = document.querySelector('#description').value;
+        event.preventDefault();
 
-    //     if (title.trim() !== '' && description.trim() !== '') {
-    //         const todoObject = {
-    //             "title": title,
-    //             "completed": "0", 
-    //             "description": description
-    //         };
+        let completed = "0";
+        const title = document.querySelector('#title').value;
+        const description = document.querySelector('#description').value;
 
-    //         try {
-    //             const todo = JSON.stringify(todoObject);
-    //             await createTodo(todo);
-    //         } catch (error) {
-    //             console.error("ERROR CREATING TODO", error);
-    //         }
-    //     }
-    // });
+        const formData = {
+            title: title,
+            completed: completed,
+            description: description
+        }
 
-    // async function createTodo(todo) {
-    //     try {
-    //         const response = await fetch('http://127.0.0.1/Todo-php-app/backend/endpoints/create.php', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: todo
-    //         });
+        const todo = JSON.stringify(formData);
+        console.log(todo)
 
-    //         if (!response.ok) {
-    //             throw new Error(`HTTP error! status: ${response.status}`);
-    //         }
+        try{
+            const {data} = await axios.post('http://127.0.0.1/Todo-php-app/backend/endpoints/create.php', todo, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            
+            console.log(data)
 
-    //         const data = await response.json();
-
-    //         if (data.success) {
-    //             getAllTasks(); // Refresh the task list after adding a new task
-    //         } else {
-    //             console.error(data.error);
-    //         }
-
-    //     } catch (error) {
-    //         console.error("ERROR ADDING TODO", error);
-    //     }
-    // }
-
+        } catch(error) {
+            console.log("ERROR CREATING TODO");
+        }
+    });
 
     async function getAllTasks() {
         try {
             const response = await axios.get('http://127.0.0.1/Todo-php-app/backend/endpoints/list-all.php');
-            console.log(response.data);
             renderTasks(response.data)
           } catch (error) {
             console.error(error);

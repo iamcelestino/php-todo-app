@@ -46,7 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
     async function getActiveTasks() {
         try {
             const response = await axios.get('http://127.0.0.1/Todo-php-app/backend/endpoints/list-active.php');
-            renderTasks(response.data)
+            renderTasks(response.data);
+          } catch (error) {
+            console.error(error);
+          }
+    }
+
+    async function getCompletedTasks() {
+        try {
+            const response = await axios.get('http://127.0.0.1/Todo-php-app/backend/endpoints/list-completed.php');
+            renderTasks(response.data);
           } catch (error) {
             console.error(error);
           }
@@ -87,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     document.querySelector('.active__todo').addEventListener('click', getActiveTasks);
+    document.querySelector('.completed__todo').addEventListener('click', getCompletedTasks);
     
     //CREATE NEW TODO
     const newTodoBtn = document.querySelector('.new__todo');
@@ -101,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     getAllTasks();
-    countActive();
+    countActive()
 })
 
 

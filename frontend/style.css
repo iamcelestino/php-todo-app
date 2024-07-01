@@ -34,14 +34,10 @@ a {
     color: rgb(159, 159, 159);
 }
 
-a + a {
-    margin-left: 0.3rem;
-}
 
 a:hover {
     color: rgb(0, 110, 255);
 }
-
 
 .search__form{
     background-color: #24273D;
@@ -53,9 +49,6 @@ a:hover {
     padding: 0.6rem 1rem;
     border: none;
     background-color: #24273D;
-    /* background: url(./images/search\(1\).svg) no-repeat;
-    background-position: right center;
-    background-size: 25px; */
 }
 
 .todo_section > container {

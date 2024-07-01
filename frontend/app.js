@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         event.preventDefault();
 
-        let completed = "0";
+        let completed = "0"; //default todo status is false/ not completed
         const title = document.querySelector('#title').value;
         const description = document.querySelector('#description').value;
 
@@ -17,17 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
             description: description
         }
 
-        const todo = JSON.stringify(formData);
-        console.log(todo)
-
         try{
+            const todo = JSON.stringify(formData);
             const {data} = await axios.post('http://127.0.0.1/Todo-php-app/backend/endpoints/create.php', todo, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
-            
-            console.log(data)
 
         } catch(error) {
             console.log("ERROR CREATING TODO");
@@ -42,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(error);
           }
     }
-    
+
     async function getActiveTasks() {
         try {
             const response = await axios.get('http://127.0.0.1/Todo-php-app/backend/endpoints/list-active.php');
@@ -71,6 +67,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    async function deleteTodo(id) {
+        try {
+            const response = await axios.delete('http://127.0.0.1/Todo-php-app/backend/endpoints/delete.php', {
+                params: {
+                    id: id
+                }
+            });
+            console.log(response.data);
+    
+        } catch(error) {
+            console.error("ERROR DELETING TODO", error);
+        }
+    }
+
     //render tasks in the front-end
     function renderTasks(todo) {
 
@@ -79,22 +89,28 @@ document.addEventListener('DOMContentLoaded', () => {
         todoContainer.innerHTML = '';
       
         todos.forEach(todo => {
-            const todoElement = `
-                <div  class="todo">
+            var todoElement = `
+                <div class="todo">
                     <div class="todo__title">
                         <div class="todo__title__item">
                             <input value="true" type="checkbox" name="complete" id="complete">
                             <p class="title">${todo.title}</p>
                         </div>
-                        <ion-icon name="close-circle"></ion-icon>
+                        <ion-icon class="${todo.id}" id="${todo.id}" name="close-circle"></ion-icon>
                     </div>
                     <p class="description">${todo.description}</p>
                 </div>
             `
             todoContainer.innerHTML += todoElement;
         });
+
     }
     
+
+    document.querySelector('.todo__container').addEventListener('click', event => {
+        deleteTodo(event.target.id);
+    })
+
     document.querySelector('.active__todo').addEventListener('click', getActiveTasks);
     document.querySelector('.completed__todo').addEventListener('click', getCompletedTasks);
     

@@ -90,6 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    async function deleteCompletedTodo() {
+        try {
+            const response = await axios.delete('http://127.0.0.1/Todo-php-app/backend/endpoints/deleteCompleted.php');
+            console.log(response.data);
+        } catch(error) {
+            console.error("ERROR DELETING TODO", error);
+        }
+    }
+
     function renderTasks(todo) {
         const todos = todo.data
         todoContainer.innerHTML = '';
@@ -131,6 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
             deleteTodo(element.id);
         }
     });
+
+    document.querySelector('.clear__completed').addEventListener('click', deleteCompletedTodo)
+
 
     document.querySelector('.active__todo').addEventListener('click', getActiveTasks);
     document.querySelector('.completed__todo').addEventListener('click', getCompletedTasks);

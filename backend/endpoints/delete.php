@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === "DELETE") {
                 "status" => 1,
                 "message" => "Todo deleted successfully."
             ));
-        } 
+        }
     } else {
         http_response_code(400);
         echo json_encode(array(

@@ -2,7 +2,6 @@
 
 class Todo
 {
-
     public $id;
     public $title;
     public $completed;
@@ -65,7 +64,7 @@ class Todo
 
     public function deleteCompletedTodo()
     {
-        $sql_query = "DELETE FROM " . $this->table_name . "WHERE completed = 1";
+        $sql_query = "DELETE FROM " . $this->table_name . " WHERE completed = 1";
 
         $stmt = $this->conn->prepare($sql_query);
 

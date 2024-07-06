@@ -11,7 +11,6 @@ $connection = $db->connect();
 
 $todo = new Todo($connection);
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $data = $todo->getAllcompleted();

@@ -34,7 +34,6 @@ a {
     color: rgb(159, 159, 159);
 }
 
-
 a:hover {
     color: rgb(0, 110, 255);
 }
@@ -90,7 +89,6 @@ ion-icon {
     font-size: 2rem;
 }
 
-
 #task__form {
     background-color: hsl(0, 3%, 87%, 0.2);
     width: 100%;
@@ -118,7 +116,6 @@ ion-icon {
     right: 0;
 }
 
-
 label {
     margin-bottom: 0.4rem;
 }
@@ -145,11 +142,13 @@ img {
     cursor: pointer;
 }
 
-.filter__todo > div {
-    color: rgb(159, 159, 159)
+.filter__todo > div,
+.clear__completed {
+    color: rgb(159, 159, 159);
 }
 
-.filter__todo > div:hover {
+.filter__todo > div:hover,
+.clear__completed:hover {
     color: blue;
 }
 

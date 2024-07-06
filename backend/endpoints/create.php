@@ -18,13 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] === "OPTIONS") {
     exit();
 }
 
-
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    
+
     $data = json_decode(file_get_contents("php://input"));
 
     if (isset($data->title) && isset($data->completed) && isset($data->description)) {
-        
+
         $todo->title = $data->title;
         $todo->completed = $data->completed;
         $todo->description = $data->description;
@@ -42,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 "message" => "Failed to create todo"
             ));
         }
-
     } else {
         http_response_code(400);
         echo json_encode(array(
@@ -50,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             "message" => "Incomplete data provided"
         ));
     }
-
 } else {
     http_response_code(405);
     echo json_encode(array(
@@ -58,4 +55,3 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         "message" => "Access Denied"
     ));
 }
-?>

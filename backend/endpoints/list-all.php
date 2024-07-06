@@ -40,5 +40,3 @@ if ($_SERVER['REQUEST_METHOD'] ===  'GET') {
         "message" => "Access Denied"
     ));
 }
-
-?>

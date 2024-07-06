@@ -14,7 +14,7 @@ $connection = $db->connect();
 $todo = new Todo($connection);
 
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    http_response_code(200); 
+    http_response_code(200);
     exit(0);
 }
 
@@ -29,12 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PAT
 
         if ($todo->markCompleted()) {
 
-            http_response_code(200); 
+            http_response_code(200);
             echo json_encode(array(
                 "status" => 1,
                 "message" => "TODO DATA UPDATED SUCCESSFULLY"
             ));
-
         } else {
             http_response_code(500);
             echo json_encode(array(

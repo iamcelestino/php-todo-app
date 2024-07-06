@@ -49,19 +49,6 @@ class Todo
         return $result;
     }
 
-    public function getSingleTodo()
-    {
-        $sql_query = "SELECT * FROM " . $this->table_name . " WHERE id = :id";
-
-        $stmt = $this->conn->prepare($sql_query);
-        $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
-
-        $stmt->execute();
-
-        $todo = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $todo;
-    }
-
     public function deleteTodo()
     {
         $sql_query = "DELETE FROM " . $this->table_name . " WHERE id = :id";

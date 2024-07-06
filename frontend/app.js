@@ -1,30 +1,25 @@
-
 document.addEventListener('DOMContentLoaded', () => {
 
     const createTodoForm = document.getElementById('task__form');
+    const todoContainer = document.querySelector('.todo__container');
 
      createTodoForm.addEventListener('submit', async function(event) {
-
         event.preventDefault();
-
-        let completed = "0"; //default todo status is false/ not completed
+        let completed = "0"; 
         const title = document.querySelector('#title').value;
         const description = document.querySelector('#description').value;
-
         const formData = {
             title: title,
             completed: completed,
             description: description
         }
-
         try{
             const todo = JSON.stringify(formData);
             const {data} = await axios.post('http://127.0.0.1/Todo-php-app/backend/endpoints/create.php', todo, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            })
-
+            });
         } catch(error) {
             console.log("ERROR CREATING TODO");
         }
@@ -57,6 +52,21 @@ document.addEventListener('DOMContentLoaded', () => {
           }
     }
 
+    async function markCompleted(id, completed) {
+        try {
+            const response = await axios.patch(`http://127.0.0.1/Todo-php-app/backend/endpoints/markCompleted.php?id=${id}`, {
+                completed: completed
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log(response.data);
+        } catch(error) {
+            console.log("COULD NOT MARK AS COMPLETED", error);
+        }
+    }
+
     async function countActive() {
         try {
             const response = await axios('http://127.0.0.1/Todo-php-app/backend/endpoints/count-active.php');
@@ -75,28 +85,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             console.log(response.data);
-    
         } catch(error) {
             console.error("ERROR DELETING TODO", error);
         }
     }
 
-    //render tasks in the front-end
     function renderTasks(todo) {
-
         const todos = todo.data
-        const todoContainer = document.querySelector('.todo__container');
         todoContainer.innerHTML = '';
-      
         todos.forEach(todo => {
-            var todoElement = `
-                <div class="todo">
+            const todoElement = `
+                <div class="todo ${todo.completed}">
                     <div class="todo__title">
                         <div class="todo__title__item">
-                            <input value="true" type="checkbox" name="complete" id="complete">
+                            <img src="./images/icon-check.svg" id="${todo.id}"  alt="">
                             <p class="title">${todo.title}</p>
                         </div>
-                        <ion-icon class="${todo.id}" id="${todo.id}" name="close-circle"></ion-icon>
+                        <ion-icon id="${todo.id}" name="close-circle"></ion-icon>
                     </div>
                     <p class="description">${todo.description}</p>
                 </div>
@@ -104,17 +109,32 @@ document.addEventListener('DOMContentLoaded', () => {
             todoContainer.innerHTML += todoElement;
         });
 
+        Array.from(todoContainer.children).forEach(child => {
+            if(child.classList.contains("1")) {
+                const img = child.firstElementChild.firstElementChild.firstElementChild
+                img.style.backgroundColor = "rgb(0, 110, 255)";
+            }
+        });
     }
-    
 
-    document.querySelector('.todo__container').addEventListener('click', event => {
-        deleteTodo(event.target.id);
-    })
+    todoContainer.addEventListener('click', event => {
+        const element = event.target;
+        const todoStatus= {completed: "1"}
+        const updateActive = JSON.stringify(todoStatus);
+
+        if(element.tagName === 'IMG') {
+           element.style.backgroundColor = 'rgb(0, 110, 255)';
+           markCompleted(element.id, updateActive);
+        } 
+        
+        if(element.tagName === 'ION-ICON') {
+            deleteTodo(element.id);
+        }
+    });
 
     document.querySelector('.active__todo').addEventListener('click', getActiveTasks);
     document.querySelector('.completed__todo').addEventListener('click', getCompletedTasks);
     
-    //CREATE NEW TODO
     const newTodoBtn = document.querySelector('.new__todo');
     const taskForm = document.querySelector('#task__form');
     
@@ -127,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     getAllTasks();
-    countActive()
+    countActive();
 })
 
 

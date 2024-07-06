@@ -74,6 +74,7 @@ a:hover {
 .todo__title, .todo__title__item {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .todo__title__item  {
@@ -88,6 +89,7 @@ ion-icon {
     color: gray;
     font-size: 2rem;
 }
+
 
 #task__form {
     background-color: hsl(0, 3%, 87%, 0.2);
@@ -116,6 +118,7 @@ ion-icon {
     right: 0;
 }
 
+
 label {
     margin-bottom: 0.4rem;
 }
@@ -135,6 +138,22 @@ textarea {
     padding: 0.4rem;
 }
 
+img {
+    background-color: white;
+    padding: 0.5rem 0.4rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.filter__todo > div {
+    color: rgb(159, 159, 159)
+}
+
+.filter__todo > div:hover {
+    color: blue;
+}
+
+.filter__todo,
 .footer {
     display: flex;
     justify-content: space-between;

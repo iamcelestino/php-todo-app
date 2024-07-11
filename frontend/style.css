@@ -10,13 +10,13 @@
 body {
     background-color: #181824;
     font-family: "Jost", sans-serif;
+
 }
 
 .container {
     max-width: 600px;
     margin: auto;
     padding: 0.8rem 1rem;
-
 }
 .header {
     display: flex;
@@ -64,7 +64,9 @@ a:hover {
     border-bottom: 1px solid gray;
 }
 
-.todo, .footer {
+.todo, 
+.footer,
+.mobile__filter__todo {
     background-color: #24273D;
     padding: 1rem;
 
@@ -80,7 +82,9 @@ a:hover {
     gap: 10px;
 }
 
-.todo__title {
+.todo__title,
+.filter__todo,
+.footer{
     justify-content: space-between;
 }
 
@@ -105,15 +109,21 @@ ion-icon {
 }
 
 #task__form .container {
-    background-color: #181824;
+    background-color: #212439;
     padding: 3.5rem;
     position: relative;
+    top: 20%;
 }
 
 .close {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 10px;
+    right: 10px;
+}
+
+.create_btn {
+    padding: 0.5rem 1rem;
+    text-align: right;
 }
 
 label {
@@ -124,11 +134,16 @@ label, input, textarea {
     display: block;
 }
 
+input, textarea {
+    background-color: rgb(198, 196, 196);
+}
+
 #task__form
 input,
 textarea {
     width: 100%;
     margin-bottom: 1rem;
+    border: none;
 }
 
 #task__form input {
@@ -140,12 +155,15 @@ img {
     padding: 0.5rem 0.4rem;
     border-radius: 50%;
     cursor: pointer;
+    border: 4px solid gray;
 }
 
 .filter__todo > div,
-.clear__completed {
+.clear__completed,
+.mobile__filter__todo{
     color: rgb(159, 159, 159);
 }
+
 
 .filter__todo > div:hover,
 .clear__completed:hover {
@@ -155,5 +173,24 @@ img {
 .filter__todo,
 .footer {
     display: flex;
-    justify-content: space-between;
+}
+
+.mobile__filter__todo {
+    justify-content: center;
+    margin-top: 1rem;
+    display: none;
+}
+
+.active__todo {
+    margin: 0 1rem;
+}
+
+@media  (max-width: 500px) {
+    .filter__todo {
+        display: none;
+    }
+
+    .mobile__filter__todo {
+        display: flex;
+    }
 }

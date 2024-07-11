@@ -41,7 +41,7 @@ class Todo
     public function getAllTodo()
     {
 
-        $sql_query = "SELECT * FROM " . $this->table_name;
+        $sql_query = "SELECT * FROM " . $this->table_name . " ORDER  BY created_at DESC";
 
         $result = $this->conn->query($sql_query);
 
@@ -102,7 +102,7 @@ class Todo
 
     public function getAtive()
     {
-        $sql_query = "SELECT * FROM " . $this->table_name . " WHERE completed = 0";
+        $sql_query = "SELECT * FROM " . $this->table_name . " WHERE completed = 0" . " ORDER  BY created_at DESC";
 
         $result = $this->conn->query($sql_query);
 

@@ -7,19 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="">
         <div class="container">
             <div class="header">
                 <h1>TODO</h1>
                 <ion-icon name="add-circle" class="new__todo"></ion-icon>
             </div>
-            <form class="search__form" action="">
-                <input type="search" name="searchTodo" id="searchTodo" class="search__todo">
-            </form>
         </div>
     </div>
-    
+
     <section class="todo_section">
         <div class="container">
             <div class="todo__container">
@@ -32,13 +28,18 @@
                     </a>
                 </div>
                 <div class="filter__todo">
-                    <div href="">All</div>
+                    <div class="all__todo">All</div>
                     <div class="active__todo">Active</div>
                     <div class="completed__todo">completed</div>
                 </div>
                 <div class="">
                     <div class="clear__completed">Clear completed</div>
                 </div>
+            </div>
+            <div class="mobile__filter__todo">
+                <div class="all__todo">All</div>
+                <div class="active__todo">Active</div>
+                <div class="completed__todo">completed</div>
             </div>
         </div>
     </section>
@@ -52,7 +53,7 @@
             <label for="description">Description</label>
             <textarea name="description" id="description" rows="6" cols="50"></textarea>
 
-            <button type="submit">CREATE</button>
+            <button class="create_btn" type="submit">CREATE</button>
         </div>
     </form>
 

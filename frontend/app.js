@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const createTodoForm = document.getElementById('task__form');
     const todoContainer = document.querySelector('.todo__container');
-
+    
      createTodoForm.addEventListener('submit', async function(event) {
         event.preventDefault();
         let completed = "0"; 
@@ -142,10 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelector('.clear__completed').addEventListener('click', deleteCompletedTodo)
+    document.querySelectorAll('.all__todo').forEach(item => item.addEventListener('click', getAllTasks))
+
+    document.querySelectorAll('.active__todo').forEach(item => {
+        item.addEventListener('click', getActiveTasks);
+    })
 
 
-    document.querySelector('.active__todo').addEventListener('click', getActiveTasks);
-    document.querySelector('.completed__todo').addEventListener('click', getCompletedTasks);
+    document.querySelectorAll('.completed__todo').forEach(item => item.addEventListener('click', getCompletedTasks));
     
     const newTodoBtn = document.querySelector('.new__todo');
     const taskForm = document.querySelector('#task__form');

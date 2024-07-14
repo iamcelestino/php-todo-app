@@ -40,7 +40,6 @@ class Todo
 
     public function getAllTodo()
     {
-
         $sql_query = "SELECT * FROM " . $this->table_name . " ORDER  BY created_at DESC";
 
         $result = $this->conn->query($sql_query);

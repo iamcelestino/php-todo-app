@@ -131,14 +131,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const todoStatus= {completed: "1"}
         const updateActive = JSON.stringify(todoStatus);
 
-        if(element.tagName === 'IMG') {
-           element.style.backgroundColor = 'rgb(0, 110, 255)';
-           markCompleted(element.id, updateActive);
-        } 
-        
-        if(element.tagName === 'ION-ICON') {
-            deleteTodo(element.id);
-        }
+        switch (element.tagName) {
+            case 'DIV':
+                element.nextElementSibling.style.display = 'block';
+                break;
+            case 'P':
+              element.parentElement.parentElement.nextElementSibling.style.display = 'block'
+              break;
+            case 'IMG':
+                element.style.backgroundColor = 'rgb(0, 110, 255)';
+                markCompleted(element.id, updateActive);
+              break;
+            case 'ION-ICON':
+                deleteTodo(element.id);
+              break;
+            default:
+              alert( "I don't know such values" );
+          }
     });
 
     document.querySelector('.clear__completed').addEventListener('click', deleteCompletedTodo)

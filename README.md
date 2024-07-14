@@ -41,6 +41,7 @@ code .
 - HTML5 markup
 - CSS 
 - PHP
+- javascript
 - MySQl
 - postman
 
